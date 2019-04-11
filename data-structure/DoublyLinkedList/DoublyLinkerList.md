@@ -15,3 +15,7 @@
 
 ### 空间复杂度
 O(n)
+
+## 参考
+* <a href="https://en.wikipedia.org/wiki/Doubly_linked_list">Wikipedia</a>
+* <a href="https://www.youtube.com/watch?v=JdQeNxWCguQ&t=7s&index=72&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a>

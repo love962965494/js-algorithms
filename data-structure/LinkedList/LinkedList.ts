@@ -12,7 +12,7 @@ export default class LinkedList {
    * @param {ICompareFunction} comparatorFunction
    * @memberof LinkedList
    */
-  constructor(comparatorFunction: ICompareFunction) {
+  constructor(comparatorFunction?: ICompareFunction) {
     this.head = null
     this.tail = null
     this.compare = new Comparator(comparatorFunction)

@@ -10,7 +10,7 @@ export default class Heap<T> {
    * @param {ICompareFunction} comparatorFunction
    * @memberof Heap
    */
-  public constructor(comparatorFunction: ICompareFunction) {
+  public constructor(comparatorFunction?: ICompareFunction) {
     if (new.target === Heap) {
       throw new TypeError('Cannot construct Heap instance directly')
     }
@@ -245,7 +245,7 @@ export default class Heap<T> {
    * @returns {Heap<T>}
    * @memberof Heap
    */
-  public add(item: T): Heap<T> {
+  public add(item: T) {
     this.heapCotainer.push(item)
     this.heapifyUp()
 

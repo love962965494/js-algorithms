@@ -1,6 +1,6 @@
-export default class LinkedListNode { 
-  public value: any
-  public next: LinkedListNode
+export default class LinkedListNode<T> { 
+  public value: T
+  public next: LinkedListNode<T>
 
   /**
    * Creates an instance of LinkedListNode.
@@ -9,7 +9,7 @@ export default class LinkedListNode {
    * @param {LinkedListNode} [next=null]
    * @memberof LinkedListNode
    */
-  constructor(value: any, next: LinkedListNode = null) {
+  constructor(value: any, next: LinkedListNode<T> = null) {
     this.value = value
     this.next = next
   }

@@ -6,8 +6,8 @@ import LinkedList from '../LinkedList/LinkedList'
 // are being handled.
 const defaultHashTableSize = 32
 
-export default class hashTable {
-  public buckets: LinkedList[]
+export default class hashTable<T> {
+  public buckets: LinkedList<{ key: string, value: T }>[]
   public keys: { [key: string]: any }
 
   /**
@@ -49,10 +49,10 @@ export default class hashTable {
   }
 
   /**
-   * set key value
+   * set key and value
    *
    * @param {string} key
-   * @param {*} value
+   * @param {T} value
    * @memberof hashTable
    */
   public set(key: string, value: any) {
@@ -95,13 +95,27 @@ export default class hashTable {
   }
 
   /**
-   * does hashTable have node
+   * get value by key
    *
    * @param {string} key
    * @returns
    * @memberof hashTable
    */
-  public has(key: string) {
+  public get(key: string) {
+    const bucketLinkedList = this.buckets[this.hash(key)]
+    const node = bucketLinkedList.find({ callback: nodeValue => nodeValue.key === key })
+
+    return node ? node.value.value : undefined
+  }
+
+  /**
+   * does hashTable have node
+   *
+   * @param {string} key
+   * @returns {boolean}
+   * @memberof hashTable
+   */
+  public has(key: string): boolean {
     return Object.hasOwnProperty.call(this.keys, key)
   }
 

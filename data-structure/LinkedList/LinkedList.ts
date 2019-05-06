@@ -1,14 +1,14 @@
 import LinkedListNode from './LinkedListNode'
 import Comparator, { ICompareFunction } from '../../utils/Comparator/Comparator'
 
-export default class LinkedList {
-  public head: LinkedListNode
-  public tail: LinkedListNode
+export default class LinkedList<T> {
+  public head: LinkedListNode<T>
+  public tail: LinkedListNode<T>
   public compare: Comparator
 
   /**
    * Creates an instance of LinkedList.
-   * 
+   *
    * @param {ICompareFunction} comparatorFunction
    * @memberof LinkedList
    */
@@ -21,11 +21,11 @@ export default class LinkedList {
   /**
    * prepend a LinkedListNode to the LinkedList
    *
-   * @param {*} value
+   * @param {T} value
    * @returns
    * @memberof LinkedList
    */
-  public prepend(value: any) {
+  public prepend(value: T) {
     const newNode = new LinkedListNode(value, this.head)
 
     this.head = newNode
@@ -41,12 +41,12 @@ export default class LinkedList {
   /**
    * append a LinkedListNode to the LinkedList
    *
-   * @param {*} value
+   * @param {T} value
    * @returns
    * @memberof LinkedList
    */
-  public append(value: any) {
-    const newNode = new LinkedListNode(value)
+  public append(value: T) {
+    const newNode = new LinkedListNode<T>(value)
 
     // if there is no head yet let's make new node a head
     if (!this.head) {
@@ -64,14 +64,14 @@ export default class LinkedList {
   }
 
   /**
-   * delete LinkedListNode from LinkedList whose value equals imported value, 
+   * delete LinkedListNode from LinkedList whose value equals imported value,
    * and return the deltedNode, else return null
    *
-   * @param {*} value
+   * @param {T} value
    * @returns
    * @memberof LinkedList
    */
-  public delete(value: any) {
+  public delete(value: T) {
     if (!this.head) {
       return null
     }
@@ -108,14 +108,13 @@ export default class LinkedList {
   }
 
   /**
-   * find LinkedListNode from LinkedList 
+   * find LinkedListNode from LinkedList
    *
-   * @param {*} [value]
-   * @param {(value: any) => boolean} [callback]
+   * @param {{ value: T; callback: (value: T) => boolean }} { value = undefined, callback = undefined }
    * @returns
    * @memberof LinkedList
    */
-  public find(value?, callback?: (value: any) => boolean) {
+  public find({ value = undefined, callback = undefined }: { value?: T; callback?: (value: T) => boolean }) {
     if (!this.head) {
       return null
     }
@@ -188,7 +187,7 @@ export default class LinkedList {
     const deletedHead = this.head
 
     if (this.head.next) {
-      this.head = this.head.next 
+      this.head = this.head.next
     } else {
       this.head = null
       this.tail = null
@@ -200,12 +199,12 @@ export default class LinkedList {
   /**
    * array of values that need to be converted to linked list
    *
-   * @param {any[]} values
+   * @param {T[]} values
    * @returns
    * @memberof LinkedList
    */
-  public fromArray(values: any[]) {
-    values.forEach(value => this.append(value))
+  public fromArray(values: T[]) {
+    values.forEach((value) => this.append(value))
 
     return this
   }
@@ -217,7 +216,7 @@ export default class LinkedList {
    * @memberof LinkedList
    */
   public toArray() {
-    const nodes: LinkedListNode[] = []
+    const nodes: LinkedListNode<T>[] = []
 
     let currentNode = this.head
 
@@ -232,12 +231,14 @@ export default class LinkedList {
   /**
    * convert LinkedList to string
    *
-   * @param {(value: any) => string} [callback]
+   * @param {(value: T) => string} [callback]
    * @returns
    * @memberof LinkedList
    */
-  public toString(callback? : (value: any) => string) {
-    return this.toArray().map(node => node.toString(callback)).toString()
+  public toString(callback?: (value: T) => string) {
+    return this.toArray()
+      .map((node) => node.toString(callback))
+      .toString()
   }
 
   /**
